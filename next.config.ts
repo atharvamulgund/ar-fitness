@@ -4,8 +4,13 @@ const nextConfig: NextConfig = {
   /* config options here */
   images: {
     // allow external images from unsplash
-    domains: ["images.unsplash.com"],
-  }
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "images.unsplash.com",
+      },
+    ],
+  },
 };
 
 export default nextConfig;

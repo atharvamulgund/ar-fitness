@@ -23,7 +23,7 @@ const HeroSection = () => {
       >
         <Bot className="size-6! text-green-500" /> AI-Powered Fitness Revolution
       </Badge>
-      <p className="flex flex-col justify-center items-center text-center text-3xl md:text-6xl gap-2 font-medium">
+      <p className="flex flex-col justify-center items-center text-center text-3xl md:text-6xl gap-2 font-medium z-105">
         Transform Your Body with <br />
         <Highlight className="text-black dark:text-white w-fit font-bold p-2">
           AI Intelligence
@@ -33,7 +33,7 @@ const HeroSection = () => {
         Real-time workout tracking, personalized meal plans, and AI-powered form
         correction—all in one seamless experience.
       </p>
-      <div className="flex justify-center items-center w-full md:flex-row flex-col gap-8">
+      <div className="flex justify-center items-center w-full md:flex-row flex-col gap-8 z-105">
         <Button className="bg-linear-to-r from-cyan-500 to-blue-500 text-black dark:text-white text-lg">
           Start a Free Trail <ArrowRightIcon />
         </Button>
