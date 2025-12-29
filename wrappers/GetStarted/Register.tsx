@@ -14,14 +14,12 @@ import {
   FieldLabel,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
-import { client } from "@/lib/appwrite";
 import { registerFormSchema } from "@/lib/validations";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Account, ID } from "appwrite";
 import { Controller, useForm } from "react-hook-form";
 
 interface HandleClickInterface {
-  (page: string): string
+  (page: string): string;
 }
 
 type RegisterInputs = {
@@ -30,36 +28,33 @@ type RegisterInputs = {
   confirmPassword: string;
 };
 
-export function SignupForm({ handleClick, ...props }: { handleClick: HandleClickInterface }) {
-    const {
-      control,
-      handleSubmit,
-      formState: { isSubmitting },
-    } = useForm<RegisterInputs>({
-      mode: "all",
-      resolver: zodResolver(registerFormSchema),
-      defaultValues: {
-        email: "",
-        password: "",
-        confirmPassword: "",
-      },
-    });
-    const account = new Account(client);
+export function SignupForm({
+  handleClick,
+  ...props
+}: {
+  handleClick: HandleClickInterface;
+}) {
 
-    const onSubmit = async (values: RegisterInputs) => {
-      console.log(values);
-      try {
-        const user = await account.create({
-          userId: ID.unique(),
-          email: values?.email,
-          password: values?.password,
-        });
-        console.log(user);
-        
-      } catch (error) {
-        console.log(error);
-      }
-    };
+  const {
+    control,
+    handleSubmit,
+    formState: { isSubmitting },
+  } = useForm<RegisterInputs>({
+    mode: "all",
+    resolver: zodResolver(registerFormSchema),
+    defaultValues: {
+      email: "",
+      password: "",
+      confirmPassword: "",
+    },
+  });
+
+  // @ts-expect-error, no need of type
+  const { signin } = useAuth();
+
+  const onSubmit = async (values: RegisterInputs) => {
+    signin(values?.email, values?.password);
+  };
   return (
     <Card {...props}>
       <CardHeader>

@@ -16,11 +16,10 @@ import {
   FieldLabel,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
-import { Account } from "appwrite";
-import { client } from "@/lib/appwrite";
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { loginFormSchema } from "../../lib/validations";
+import { useAuth } from "@/providers/AuthProvider";
 
 interface HandleClickInterface {
   (page: string): string;
@@ -46,18 +45,10 @@ export function LoginForm({
       password: "",
     },
   });
-  const account = new Account(client);
-
+  // @ts-expect-error, no need of type
+  const { login } = useAuth();
   const onSubmit = async (values: LoginInputs) => {
-    try {
-      const session = await account.createEmailPasswordSession({
-        email: values?.email,
-        password: values?.password,
-      });
-      console.log(session);
-    } catch (error) {
-      console.log(error);
-    }
+    login(values?.email, values?.password);
   };
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>

@@ -29,6 +29,6 @@
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts",
     "**/*.mts"
-, "lib/appwrite.js"  ],
+, "lib/appwrite.js", "providers/AuthProvider.jsx"  ],
   "exclude": ["node_modules"]
 }
